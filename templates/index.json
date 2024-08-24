@@ -12,6 +12,7 @@
     "image_banner": {
       "type": "image-banner",
       "settings": {
+        "image": "shopify:\/\/shop_images\/7037c5eb34c25a5c11fad0c6680a2b64.jpg",
         "image_overlay_opacity": 40,
         "image_height": "large",
         "desktop_content_position": "bottom-center",
