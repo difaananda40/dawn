@@ -40,7 +40,7 @@
       assign ratio = 1
     endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover">
+  <a class="card-wrapper product-card-wrapper underline-links-hover" href="{{ card_product.url }}">
     <div
       class="
         card card--{{ settings.card_style }}
@@ -115,14 +115,9 @@
               id="title-{{ section_id }}-{{ card_product.id }}"
             {% endif %}
           >
-            <a
-              href="{{ card_product.url }}"
-              id="CardLink-{{ section_id }}-{{ card_product.id }}"
-              class="full-unstyled-link"
-              aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
-            >
+            <p>
               {{ card_product.title | escape }}
-            </a>
+            </p>
           </h3>
           <div class="card-information">
             {%- if show_vendor -%}
@@ -527,7 +522,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </a>
 {%- else -%}
   {%- liquid
     assign ratio = 1
