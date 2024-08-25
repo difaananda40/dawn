@@ -421,11 +421,14 @@
 
 .card--standard > .card__content {
   padding: 0 1.5rem;
+  position: absolute;
+  bottom: 0;
 }
 
 .card--standard > .card__content .card__information {
   padding-left: 0;
   padding-right: 0;
+  text-transform: uppercase;
 }
 
 .card--card.card--media .card__inner .card__information,
