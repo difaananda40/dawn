@@ -1,0 +1,107 @@
+{% comment %} 1. CSS STYLING {% endcomment %}
+{% style %}
+  .custom-faq-wrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  .custom-faq-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+  }
+  .custom-faq-item {
+    border-bottom: 1px solid #eaeaea;
+    padding: 15px 0;
+  }
+  /* Menggunakan tag <details> bawaan HTML agar tidak perlu Javascript */
+  .custom-faq-item summary {
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    list-style: none; /* Menghilangkan panah default di beberapa browser */
+    position: relative;
+    padding-right: 20px;
+  }
+  .custom-faq-item summary::-webkit-details-marker {
+    display: none; /* Menghilangkan panah default di Chrome/Safari */
+  }
+  .custom-faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 18px;
+  }
+  .custom-faq-item[open] summary::after {
+    content: '-';
+  }
+  .custom-faq-answer {
+    margin-top: 15px;
+    color: #555;
+    line-height: 1.6;
+  }
+{% endstyle %}
+
+{% comment %} 2. HTML & LIQUID STRUCTURE {% endcomment %}
+<div class="custom-faq-wrapper">
+  {% if section.settings.title != blank %}
+    <h2 class="custom-faq-title">{{ section.settings.title }}</h2>
+  {% endif %}
+
+  <div class="faq-accordion">
+    {% for block in section.blocks %}
+      <!-- Atribut shopify_attributes penting agar block bisa di-klik di Theme Editor -->
+      <details class="custom-faq-item" {{ block.shopify_attributes }}>
+        <summary>{{ block.settings.question }}</summary>
+        <div class="custom-faq-answer">
+          {{ block.settings.answer }}
+        </div>
+      </details>
+    {% endfor %}
+  </div>
+</div>
+
+{% comment %} 3. SCHEMA (Koneksi ke Theme Editor) {% endcomment %}
+{% schema %}
+{
+  "name": "Custom FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading Title",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_block",
+      "name": "Q&A Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Tulis pertanyaan di sini..."
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Tulis jawaban di sini...</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom FAQ",
+      "blocks": [
+        { "type": "faq_block" },
+        { "type": "faq_block" }
+      ]
+    }
+  ]
+}
+{% endschema %}
